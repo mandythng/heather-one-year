@@ -631,9 +631,9 @@
         id: "pikler-triangle",
         name: "Pikler Triangle",
         description: "A climbing frame for gross motor play at home.",
-        price_sgd: 220,
+        price_sgd: "149 - 220",
         target_sgd: 220,
-        link: "",
+        link: "Carousell 1|https://www.carousell.sg/p/playfull-tribe-pikler-triangle-1436261418/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=category_slp&t-referrer_request_id=OEAoga9AsjGElkIb&t-referrer_search_query=pikler%20triangle&t-referrer_source=search_landing&t-tap_index=2\nCarousell 2|https://www.carousell.sg/p/leo-cru-pikler-triangle-platte-set-with-double-sided-ramp-price-negotiable-1439036569/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=category_slp&t-referrer_request_id=OEAoga9AsjGElkIb&t-referrer_search_query=pikler%20triangle&t-referrer_source=search_landing&t-tap_index=0\nShopee|https://shopee.sg/product/575592772/20493536638?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEbgAAAAwoa46fOCShlnfv_YTrjybr9JuZeUMUWJ12H91-gU37PKFSTFi_WRKwxUbjPf5zoENBL--SPM3gB2wzSfi1O6e9aY2WfijmlQNdWGZwolnQStNWK8gLNz37huob3JDZNXiw2vkOC-JyAcGO&gad_source=1&gad_campaignid=23664439582&gbraid=0AAAAADPpRQRz6_4dW1YswaCY4LdDK44nD&gclid=CjwKCAjwt7XQBhBkEiwAtStpp0s2CB7o8J6C9WMSekY76hZnRVlD8KPN1fvxVSdHZUir8XId8EhchxoCaIUQAvD_BwE",
         image: "assets/registry/gift-pikler-triangle.png",
         mode: "claim_or_contribute",
         sort_order: 2,
@@ -776,12 +776,24 @@
       }
     ];
 
+    const GIFT_OVERRIDES = {
+      "pikler-triangle": {
+        price_sgd: "149 - 220",
+        target_sgd: 220,
+        link: "Carousell 1|https://www.carousell.sg/p/playfull-tribe-pikler-triangle-1436261418/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=category_slp&t-referrer_request_id=OEAoga9AsjGElkIb&t-referrer_search_query=pikler%20triangle&t-referrer_source=search_landing&t-tap_index=2\nCarousell 2|https://www.carousell.sg/p/leo-cru-pikler-triangle-platte-set-with-double-sided-ramp-price-negotiable-1439036569/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=category_slp&t-referrer_request_id=OEAoga9AsjGElkIb&t-referrer_search_query=pikler%20triangle&t-referrer_source=search_landing&t-tap_index=0\nShopee|https://shopee.sg/product/575592772/20493536638?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEbgAAAAwoa46fOCShlnfv_YTrjybr9JuZeUMUWJ12H91-gU37PKFSTFi_WRKwxUbjPf5zoENBL--SPM3gB2wzSfi1O6e9aY2WfijmlQNdWGZwolnQStNWK8gLNz37huob3JDZNXiw2vkOC-JyAcGO&gad_source=1&gad_campaignid=23664439582&gbraid=0AAAAADPpRQRz6_4dW1YswaCY4LdDK44nD&gclid=CjwKCAjwt7XQBhBkEiwAtStpp0s2CB7o8J6C9WMSekY76hZnRVlD8KPN1fvxVSdHZUir8XId8EhchxoCaIUQAvD_BwE"
+      }
+    };
+
     let registryState = {
       gifts: DEFAULT_GIFTS,
       responses: previewResponses(),
       readOnly: !REGISTRY_ENDPOINT,
       source: REGISTRY_ENDPOINT ? "Loading live registry..." : "Preview mode"
     };
+
+    function applyGiftOverrides(gifts) {
+      return gifts.map(gift => ({ ...gift, ...(GIFT_OVERRIDES[gift.id] || {}) }));
+    }
 
     function escapeHtml(value) {
       return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -1149,8 +1161,9 @@
         if (!response.ok) throw new Error("Sheet request failed");
         const data = await response.json();
         if (data.ok === false) throw new Error(data.error || "Sheet returned an error");
+        const sheetGifts = Array.isArray(data.gifts) && data.gifts.length ? data.gifts : DEFAULT_GIFTS;
         registryState = {
-          gifts: Array.isArray(data.gifts) && data.gifts.length ? data.gifts : DEFAULT_GIFTS,
+          gifts: applyGiftOverrides(sheetGifts),
           responses: Array.isArray(data.responses) ? data.responses : [],
           readOnly: false,
           source: "Live registry"
