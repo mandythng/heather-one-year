@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heather's First Birthday Registry</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;650;750&family=WindSong:wght@500&display=swap");
+
+    :root {
+      --cream: #fbf7ed;
+      --parchment: #f2e4c8;
+      --paper: #fff7e7;
+      --sage: #66794f;
+      --sage-soft: #d9e0c9;
+      --honey: #d69a2d;
+      --brown: #5b3b20;
+      --brown-soft: #8a6a43;
+      --blue: #b8d9dc;
+      --rose: #c99586;
+      --line: rgba(91, 59, 32, 0.2);
+      --shadow: 0 18px 42px rgba(91, 59, 32, 0.16);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --script: "WindSong", "Brush Script MT", cursive;
+      --body: "Inter", "Avenir Next", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--brown);
+      font-family: var(--body);
+      line-height: 1.45;
+      background:
+        linear-gradient(rgba(251, 247, 237, 0.56), rgba(251, 247, 237, 0.62)),
+        url("assets/registry/sage-parchment-background.jpg") center / 720px auto repeat,
+        var(--cream);
+    }
+
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3, p { margin: 0; }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 54px;
+    }
+
+    .hero {
+      position: relative;
+      aspect-ratio: 1024 / 453;
+      min-height: 0;
+      overflow: visible;
+      background: transparent;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 46px;
+      margin: 0 0 28px;
+      padding: 11px 16px;
+      border: 1px solid rgba(91, 59, 32, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 249, 232, 0.74);
+      color: var(--brown-soft);
+      font-size: 0.88rem;
+    }
+
+    .status-strip strong { color: var(--sage); }
+
+    .how-it-works {
+      position: relative;
+      width: min(880px, 100%);
+      min-height: 345px;
+      margin: 0 auto 34px;
+      padding: clamp(64px, 8vw, 88px) clamp(34px, 7vw, 92px);
+      background: url("assets/registry/how-it-works-card.png") center / 100% 100% no-repeat;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+      color: var(--sage);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .step {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+      color: var(--brown-soft);
+      font-size: 0.93rem;
+    }
+
+    .step strong {
+      color: var(--brown);
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.05;
+    }
+
+    .registry-board {
+      position: relative;
+      margin-top: 8px;
+      padding: clamp(8px, 2vw, 18px) 0 0;
+      background: transparent;
+    }
+
+    .board-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 auto 14px;
+      padding: 0 4px;
+    }
+
+    .board-top h2 {
+      color: var(--sage);
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      line-height: 0.95;
+    }
+
+    .hunny-pot-accent {
+      width: clamp(150px, 22vw, 255px);
+      margin: -42px -10px -28px 0;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 12px 13px rgba(91, 59, 32, 0.14));
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 2.5vw, 28px);
+      align-items: stretch;
+    }
+
+    .gift-card {
+      position: relative;
+      min-height: 455px;
+      padding: 50px 36px 38px;
+      display: grid;
+      grid-template-rows: 136px minmax(58px, auto) 82px 34px auto auto;
+      align-content: start;
+      isolation: isolate;
+      cursor: pointer;
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform 180ms ease, filter 180ms ease, opacity 180ms ease;
+    }
+
+    .gift-card:hover { transform: rotate(0deg) translateY(-3px); }
+    .gift-card:focus-visible {
+      outline: 3px solid rgba(102, 121, 79, 0.42);
+      outline-offset: 4px;
+      transform: rotate(0deg) translateY(-3px);
+    }
+
+    .gift-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: url("assets/registry/pinned-card-tall.png") center / 100% 100% no-repeat;
+      filter: drop-shadow(0 16px 18px rgba(91, 59, 32, 0.15));
+    }
+
+    .gift-card.claimed {
+      opacity: 0.58;
+      filter: grayscale(0.95);
+    }
+
+    .gift-card.claimed .action-panel { display: none; }
+
+    .gift-art-wrap {
+      display: grid;
+      place-items: center;
+      min-height: 132px;
+      margin-bottom: 4px;
+    }
+
+    .gift-art {
+      width: min(182px, 72%);
+      max-height: 170px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 8px rgba(91, 59, 32, 0.10));
+    }
+
+    .gift-title {
+      color: var(--brown);
+      font-family: var(--serif);
+      font-size: 1.58rem;
+      line-height: 1.02;
+      text-align: center;
+      align-self: end;
+    }
+
+    .gift-desc {
+      margin-top: 7px;
+      color: var(--brown-soft);
+      font-size: 0.86rem;
+      text-align: center;
+      align-self: start;
+    }
+
+    .gift-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 32px;
+      margin: 0 0 14px;
+      align-self: start;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 10px;
+      border: 1px solid rgba(91, 59, 32, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 249, 232, 0.72);
+      color: var(--sage);
+      font-size: 0.78rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 11px;
+      border: 1px solid rgba(91, 59, 32, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 249, 232, 0.7);
+      color: #9b5d35;
+      font-size: 0.82rem;
+      font-weight: 750;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .product-links {
+      display: grid;
+      gap: 8px;
+      margin: 4px 0 18px;
+    }
+
+    .product-links-label {
+      color: var(--brown-soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .product-link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .progress {
+      display: grid;
+      gap: 7px;
+      margin: 0 0 12px;
+    }
+
+    .progress-track {
+      height: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(91, 59, 32, 0.16);
+      border-radius: 999px;
+      background: rgba(91, 59, 32, 0.08);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: var(--progress, 0%);
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--honey), var(--sage));
+    }
+
+    .progress-copy {
+      color: var(--brown-soft);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    .responses {
+      margin: 0 0 12px;
+      color: var(--brown-soft);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    .responses:empty { display: none; }
+
+    .responses strong { color: var(--brown); }
+
+    .claimed-label {
+      display: none;
+      margin: auto auto 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(91, 59, 32, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 249, 232, 0.82);
+      color: var(--sage);
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .gift-card.claimed .claimed-label { display: block; }
+
+    .action-panel {
+      display: grid;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .action-panel form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .contribute-form {
+      grid-template-columns: 1fr;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0;
+      min-height: 38px;
+      border: 1px solid rgba(91, 59, 32, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 249, 232, 0.9);
+      color: var(--brown);
+      padding: 8px 10px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: rgba(102, 121, 79, 0.62);
+      box-shadow: 0 0 0 3px rgba(102, 121, 79, 0.12);
+    }
+
+    .btn {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid rgba(91, 59, 32, 0.22);
+      border-radius: 8px;
+      background: #fff4cf;
+      color: var(--brown);
+      padding: 8px 11px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .btn.primary {
+      background: var(--sage);
+      color: #fffaf0;
+      border-color: var(--sage);
+    }
+
+    .btn:disabled, input:disabled {
+      cursor: not-allowed;
+      opacity: 0.58;
+      pointer-events: none;
+    }
+
+    .footer-note {
+      width: min(760px, 100%);
+      margin: 34px auto 0;
+      color: var(--brown-soft);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 20;
+      max-width: min(420px, calc(100% - 32px));
+      transform: translateX(-50%) translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: rgba(59, 44, 28, 0.94);
+      color: #fff8e8;
+      font-size: 0.9rem;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(55, 42, 25, 0.36);
+    }
+
+    .modal-backdrop.open { display: grid; }
+
+    .gift-modal {
+      position: relative;
+      width: min(780px, 100%);
+      max-height: min(860px, calc(100vh - 44px));
+      overflow: auto;
+      padding: clamp(22px, 4vw, 36px);
+      border: 1px solid rgba(91, 59, 32, 0.2);
+      border-radius: 10px;
+      background:
+        linear-gradient(rgba(255, 249, 232, 0.84), rgba(255, 249, 232, 0.88)),
+        url("assets/registry/sage-parchment-background.jpg") center / 620px auto repeat;
+      box-shadow: 0 24px 70px rgba(45, 32, 18, 0.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(91, 59, 32, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 249, 232, 0.88);
+      color: var(--brown);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .modal-content {
+      display: grid;
+      grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(18px, 4vw, 34px);
+      align-items: center;
+    }
+
+    .modal-art {
+      width: min(260px, 100%);
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 12px rgba(91, 59, 32, 0.12));
+    }
+
+    .modal-title {
+      color: var(--brown);
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 0.92;
+    }
+
+    .modal-copy {
+      margin-top: 10px;
+      color: var(--brown-soft);
+      font-size: 1rem;
+    }
+
+    .modal-meta {
+      justify-content: flex-start;
+      margin: 16px 0 18px;
+    }
+
+    .modal-actions {
+      max-width: 380px;
+      margin-top: 18px;
+    }
+
+    .modal-actions .action-panel {
+      margin-top: 0;
+    }
+
+    .undo-panel {
+      display: grid;
+      gap: 8px;
+      margin: 16px 0 0;
+      padding: 12px;
+      border: 1px solid rgba(91, 59, 32, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 249, 232, 0.58);
+      color: var(--brown-soft);
+      font-size: 0.82rem;
+    }
+
+    .undo-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn.subtle {
+      width: auto;
+      min-height: 32px;
+      background: rgba(255, 249, 232, 0.74);
+      color: var(--brown-soft);
+      padding: 6px 10px;
+    }
+
+    @media (max-width: 980px) {
+      .gift-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: 1fr; }
+      .how-it-works { min-height: 430px; background-size: 118% 100%; }
+    }
+
+    @media (max-width: 680px) {
+      .site-shell { width: min(100% - 18px, 1180px); padding-top: 8px; }
+      .status-strip { align-items: flex-start; flex-direction: column; }
+      .board-top { align-items: center; }
+      .hunny-pot-accent { width: 138px; margin: -28px -4px -18px 0; }
+      .gift-grid { grid-template-columns: 1fr; }
+      .gift-card { min-height: 440px; padding: 50px 34px 38px; transform: none; }
+      .gift-desc { min-height: auto; }
+      .how-it-works { min-height: 420px; padding: 66px 30px; background-size: 170% 100%; }
+      .modal-content { grid-template-columns: 1fr; text-align: center; }
+      .modal-meta { justify-content: center; }
+      .modal-actions { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <section class="hero" aria-label="Heather is one birthday registry header">
+      <img src="assets/registry/header-edited.png" alt="Our little hunny, Heather is one. Your presence is the sweetest gift. If you insist on a gift, here are some things we're considering for Heather. No pressure at all, please come celebrate with us.">
+    </section>
+
+    <div class="status-strip" id="statusStrip">
+      <span><strong>Preview mode.</strong> Add your Google Apps Script URL in the page settings to enable live guest responses.</span>
+      <span id="lastUpdated">Sample registry shown</span>
+    </div>
+
+    <section class="how-it-works" aria-labelledby="howTitle">
+      <h2 class="section-heading" id="howTitle">How it works</h2>
+      <ol class="steps">
+        <li class="step"><strong>Choose a gift</strong><span>Open the link if you want to know where you might be able to find such an item, or feel free to get anything similar / second hand!</span></li>
+        <li class="step"><strong>Claim or chip in</strong><span>Leave your name if you are getting it, or add an SGD amount if you want to contribute. We'll pool the money with other contributors to purchase it for her!</span></li>
+      </ol>
+    </section>
+
+    <section class="registry-board" aria-labelledby="registryTitle">
+      <div class="board-top">
+        <h2 id="registryTitle">Little things for Heather</h2>
+        <img class="hunny-pot-accent" src="assets/registry/hunny-pot-accent.png" alt="">
+      </div>
+      <div class="gift-grid" id="giftGrid" aria-live="polite"></div>
+    </section>
+
+    <p class="footer-note">No pressure, genuinely. This page is only here for guests who asked what Heather might enjoy next.</p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop" id="giftModal" aria-hidden="true">
+    <article class="gift-modal" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle">
+      <button class="modal-close" id="closeGiftModal" type="button" aria-label="Close gift details">×</button>
+      <div class="modal-content" id="giftModalContent"></div>
+    </article>
+  </div>
+
+  <script>
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS8qd8WVARb5gM5_JPJRGPtCCvHTaNnoBClWvJ9q_g38wP9_7llbw1FT1MOZlup3Go0Q/exec";
+    const endpointFromQuery = new URLSearchParams(window.location.search).get("endpoint");
+    if (endpointFromQuery) localStorage.setItem("heatherRegistryEndpoint", endpointFromQuery);
+    const REGISTRY_ENDPOINT = endpointFromQuery || localStorage.getItem("heatherRegistryEndpoint") || APPS_SCRIPT_URL;
+    const LOCAL_RESPONSE_KEY = "heatherRegistryPreviewResponses";
+    const RESPONSE_OWNER_KEY = "heatherRegistryOwnedResponses";
+
+    const DEFAULT_GIFTS = [
+      {
+        id: "balance-bicycle",
+        name: "Balance Bicycle",
+        description: "A first little bike for practising balance before pedals.",
+        price_sgd: 85,
+        target_sgd: 85,
+        link: "https://shopee.sg/product/219809020/26828670213?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEbgAAAAyFPVFI5hyFun4-JW4RFsVnMX0zuOXf7adoPq2qSE0YUR52bOtO8lq4Hfs8jYVEsd1jJxGFj3FkoQsp3iN7QkhJ__-_i9kYaUQD4R84wYU66OecQvDPgF_38WZvdZOfzUAsnQGghIdahY7Y&gad_source=1&gad_campaignid=23295230387&gbraid=0AAAAADPpRQTGSbd9wghfxYGCX9HBlpUI3&gclid=CjwKCAjwt7XQBhBkEiwAtStpp1787yT9FCbQ6sSXuSeEUqPattPnBFHZ-wWpTzTPD5BUaTnR9_M4lxoCY4cQAvD_BwE",
+        image: "assets/registry/gift-balance-bicycle.png",
+        mode: "claim_or_contribute",
+        sort_order: 1,
+        active: true
+      },
+      {
+        id: "pikler-triangle",
+        name: "Pikler Triangle",
+        description: "A climbing frame for gross motor play at home.",
+        price_sgd: 220,
+        target_sgd: 220,
+        link: "",
+        image: "assets/registry/gift-pikler-triangle.png",
+        mode: "claim_or_contribute",
+        sort_order: 2,
+        active: true
+      },
+      {
+        id: "books",
+        name: "Books",
+        description: "Heather loves board books, picture books, lift-the-flap books, pop-up books, and books with music.",
+        price_sgd: "",
+        target_sgd: "",
+        link: "",
+        image: "assets/registry/gift-books.png",
+        mode: "multi_claim",
+        sort_order: 3,
+        active: true
+      },
+      {
+        id: "wooden-blocks",
+        name: "Wooden Blocks",
+        description: "Classic stacking blocks she can build, knock down, and rediscover.",
+        price_sgd: 21,
+        target_sgd: 21,
+        link: "https://shopee.sg/product/428619551/20031069116?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEbgAAAAwjjXXViwGCHfvTQHd-fRv5eho6OxA6THa6W1RvpLx_uPQrWKFDjoGoyU0t_8oi4ihOC46IBkeUWOjV_ZL2vpnJ3WHHZnp4N0StFbXiM9PsTCL010IHGDEsDb1bkTJBKCR4ti9JHP3-yTYK",
+        image: "assets/registry/gift-wooden-blocks.png",
+        mode: "claim_or_contribute",
+        sort_order: 4,
+        active: true
+      },
+      {
+        id: "babbler-play-kit",
+        name: "Lovevery Babbler Play Kit",
+        description: "A toddler play kit with Montessori-style toys for problem solving and pretend play.",
+        price_sgd: "70 - 175",
+        target_sgd: 175,
+        link: "Lovevery|https://lovevery.com/products/the-play-kits-the-babbler\nCarousell 1|https://www.carousell.sg/p/lovevery-the-babbler-play-kit-13-15-months-1438305500/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=global_slp&t-referrer_request_id=Q-2lVjZay_rqhh9A&t-referrer_search_query=lovevery%20babbler&t-referrer_source=search_landing&t-tap_index=0\nCarousell 2|https://www.carousell.sg/p/bnib-lovevery-the-babbler-play-kit-1433149176/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=global_slp&t-referrer_request_id=Q-2lVjZay_rqhh9A&t-referrer_search_query=lovevery%20babbler&t-referrer_source=search_landing&t-tap_index=2",
+        image: "assets/registry/gift-babbler-play-kit.png",
+        mode: "claim_or_contribute",
+        sort_order: 5,
+        active: true
+      },
+      {
+        id: "montessori-bookshelf",
+        name: "Montessori Bookshelf",
+        description: "A front-facing wooden bookshelf so Heather can see and choose her own books.",
+        price_sgd: "150 - 300",
+        target_sgd: 300,
+        link: "Shopee|https://shopee.sg/Montessori-Bookshelf-Toyshelf-Wooden-i.114383105.22166056662\nCarousell|https://www.carousell.sg/p/loft-home-montessori-bookshelf-bookcase-1431858538/?t-id=oNFKi1OfxP_1779280024006&t-referrer_browse_type=search_results&t-referrer_context=global_slp&t-referrer_request_id=SD2AQTQm-udpsao_&t-referrer_search_query=montessori%20bookshelf&t-referrer_source=search_landing&t-tap_index=9",
+        image: "assets/registry/gift-montessori-bookshelf.png",
+        mode: "claim_or_contribute",
+        sort_order: 7,
+        active: true
+      },
+      {
+        id: "palm-grasp-crayons",
+        name: "Palm-Grasp Crayons",
+        description: "Chunky washable egg crayons that are easier for little hands to grip.",
+        price_sgd: "12 - 23",
+        target_sgd: 23,
+        link: "Amazon|https://www.amazon.sg/dp/B0DNLY6PFR/ref=sspa_dk_detail_0?pd_rd_i=B0DNLY6PFR&pd_rd_w=xRLEQ&content-id=amzn1.sym.e8a65a17-9528-4864-b5a1-87609e247ff8&pf_rd_p=e8a65a17-9528-4864-b5a1-87609e247ff8&pf_rd_r=Z9QZ7RVJZT0Q4SXZTKNM&pd_rd_wg=To8MK&pd_rd_r=e3e5c95c-02f7-4b88-8bc3-222c532fdd1e&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&th=1\nPupsik|https://pupsik.sg/products/crayola-my-first-washable-palm-grasp-crayons-6pc?variant=46865442832638&country=SG&currency=SGD&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&gad_source=1&gad_campaignid=17181944803&gbraid=0AAAAAD2pIKID5E7IP05CRfiKM3igbNpn9&gclid=CjwKCAjwt7XQBhBkEiwAtStpp1ueKA7IOHBXf2Ig92tP3XPrgj9LxRThd4D3sMSbjc8wxUSdiSorDhoCZ50QAvD_BwE",
+        image: "assets/registry/gift-palm-grasp-crayons.png",
+        mode: "claim_or_contribute",
+        sort_order: 8,
+        active: true
+      },
+      {
+        id: "stacking-cups",
+        name: "Stacking Cups",
+        description: "Muted nesting cups for stacking, nesting, scooping, and open-ended play.",
+        price_sgd: 22,
+        target_sgd: 22,
+        link: "https://pupsik.sg/products/mushie-stacking-cups-toy-4-colors?variant=46865185997054",
+        image: "assets/registry/gift-stacking-cups.png",
+        mode: "claim_or_contribute",
+        sort_order: 9,
+        active: true
+      },
+      {
+        id: "busy-board",
+        name: "Busy Board",
+        description: "A wooden activity board with latches, zips, knobs, and little problem-solving bits.",
+        price_sgd: "",
+        target_sgd: "",
+        link: "",
+        image: "assets/registry/gift-busy-board.png",
+        mode: "claim_or_contribute",
+        sort_order: 10,
+        active: true
+      },
+      {
+        id: "ball-pit-balls",
+        name: "Plastic Balls for Ball Pit",
+        description: "Neutral plastic balls to top up Heather's ball pit for soft play.",
+        price_sgd: 28,
+        target_sgd: 28,
+        link: "https://shopee.sg/product/5696946/6326165441?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEaAAAAAwt-kkOTp0X81699RARyJV50qNRa_YyiNqdAUTi-EmD7VTtMZmrnq7nQHyuQJZvArKmlw9Hwa8OCAJpRaaOzLsxLUHAUHVQ367uPOShiC2yjfmb_F_h4scQgnnVsyCepAozj_YW&gad_source=1&gad_campaignid=23295224318&gbraid=0AAAAADPpRQRFmUkuVj0hqjFVZikqCSI_R&gclid=CjwKCAjwt7XQBhBkEiwAtStpp1YbKnz-_bst8HkgyYori2du9cKnOZoTU5HoVl90TIJV3z39Bi3SuBoCwKwQAvD_BwE",
+        image: "assets/registry/gift-ball-pit-balls.png",
+        mode: "claim_or_contribute",
+        sort_order: 11,
+        active: true
+      },
+      {
+        id: "building-bath-toy-set",
+        name: "Building Bath Toy Set",
+        description: "A bath-time pipe set for pouring, connecting, and watching water flow.",
+        price_sgd: 34,
+        target_sgd: 34,
+        link: "Amazon|https://www.amazon.sg/Boon-Pipes-Water-Bath-Toy/dp/B00R0V7PUU/ref=pd_sim_d_sccl_3_4/355-5434235-6533322?pd_rd_w=ZWip8&content-id=amzn1.sym.6a562875-c67f-47f5-bae6-13ca2b1d8a3b&pf_rd_p=6a562875-c67f-47f5-bae6-13ca2b1d8a3b&pf_rd_r=J76MSFS7QK7NBS8GW5MV&pd_rd_wg=OxVhw&pd_rd_r=7ccaa5ae-2310-4311-b94f-9e864df998f4&pd_rd_i=B00R0V7PUU&th=1",
+        image: "assets/registry/gift-building-bath-toy-set.png",
+        mode: "claim_or_contribute",
+        sort_order: 12,
+        active: true
+      }
+    ];
+
+    const DEFAULT_RESPONSES = [
+      {
+        timestamp: "2026-05-20T00:00:00.000Z",
+        gift_id: "books",
+        guest_name: "Sample: Auntie",
+        response_type: "reserve",
+        amount_sgd: "",
+        note: ""
+      },
+      {
+        timestamp: "2026-05-20T00:00:00.000Z",
+        gift_id: "wooden-blocks",
+        guest_name: "Sample: Grandpa",
+        response_type: "reserve",
+        amount_sgd: "",
+        note: ""
+      },
+      {
+        timestamp: "2026-05-20T00:00:00.000Z",
+        gift_id: "montessori-bookshelf",
+        guest_name: "Sample: Friend",
+        response_type: "contribute",
+        amount_sgd: 80,
+        note: ""
+      }
+    ];
+
+    let registryState = {
+      gifts: DEFAULT_GIFTS,
+      responses: previewResponses(),
+      readOnly: !REGISTRY_ENDPOINT,
+      source: REGISTRY_ENDPOINT ? "Loading live registry..." : "Preview mode"
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[character]));
+    }
+
+    function money(value) {
+      const number = Number(value);
+      if (!Number.isFinite(number) || number <= 0) return "";
+      return `SGD ${number.toLocaleString("en-SG", { maximumFractionDigits: 0 })}`;
+    }
+
+    function priceText(value) {
+      const numeric = money(value);
+      if (numeric) return numeric;
+      const text = String(value ?? "").trim();
+      if (!text) return "";
+      return text.toUpperCase().startsWith("SGD") ? text : `SGD ${text}`;
+    }
+
+    function sortPrice(gift) {
+      if (!priceText(gift.price_sgd)) return null;
+      const direct = Number(gift.price_sgd);
+      if (Number.isFinite(direct) && direct > 0) return direct;
+      const match = String(gift.price_sgd).match(/\d+(?:\.\d+)?/);
+      return match ? Number(match[0]) : null;
+    }
+
+    function targetAmount(gift) {
+      const target = Number(gift.target_sgd);
+      if (Number.isFinite(target) && target > 0) return target;
+      const price = Number(gift.price_sgd);
+      return Number.isFinite(price) && price > 0 ? price : 0;
+    }
+
+    function targetText(gift) {
+      const target = targetAmount(gift);
+      return target ? money(target) : "";
+    }
+
+    function compareGifts(a, b) {
+      const claimedDelta = Number(isClaimed(a)) - Number(isClaimed(b));
+      if (claimedDelta) return claimedDelta;
+
+      const aPrice = sortPrice(a);
+      const bPrice = sortPrice(b);
+      const unpricedDelta = Number(aPrice !== null) - Number(bPrice !== null);
+      if (unpricedDelta) return unpricedDelta;
+      if (aPrice !== null && bPrice !== null && aPrice !== bPrice) return aPrice - bPrice;
+      return Number(a.sort_order || 0) - Number(b.sort_order || 0);
+    }
+
+    function labelFromUrl(url) {
+      try {
+        const host = new URL(url).hostname.replace(/^www\./, "");
+        if (host.includes("amazon.")) return "Amazon";
+        if (host.includes("shopee.")) return "Shopee";
+        if (host.includes("pupsik.")) return "Pupsik";
+        if (host.includes("lovevery.")) return "Lovevery";
+        return host.split(".")[0].replace(/^\w/, letter => letter.toUpperCase());
+      } catch (error) {
+        return "Link";
+      }
+    }
+
+    function giftLinks(gift) {
+      if (!gift.link) return [];
+      return String(gift.link)
+        .split(/\n|;;/)
+        .map(part => part.trim())
+        .filter(Boolean)
+        .map(part => {
+          const pieces = part.split("|");
+          if (pieces.length >= 2) {
+            const label = pieces.shift().trim();
+            const url = pieces.join("|").trim();
+            return { label: label || labelFromUrl(url), url };
+          }
+          return { label: labelFromUrl(part), url: part };
+        })
+        .filter(link => link.url);
+    }
+
+    function giftLinksMarkup(gift) {
+      const links = giftLinks(gift);
+      if (!links.length) return "";
+      return `
+        <div class="product-links">
+          <span class="product-links-label">Where to find it</span>
+          <div class="product-link-list">
+            ${links.map(link => `<a class="product-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">${escapeHtml(link.label)}</a>`).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function localResponses() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(LOCAL_RESPONSE_KEY) || "[]");
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function previewResponses() {
+      return [...DEFAULT_RESPONSES, ...localResponses()];
+    }
+
+    function ownedResponses() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(RESPONSE_OWNER_KEY) || "{}");
+        return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function rememberOwnedResponse(response) {
+      if (!response.response_id || !response.edit_token) return;
+      const owned = ownedResponses();
+      owned[response.response_id] = {
+        edit_token: response.edit_token,
+        gift_id: response.gift_id,
+        guest_name: response.guest_name,
+        response_type: response.response_type,
+        amount_sgd: response.amount_sgd
+      };
+      localStorage.setItem(RESPONSE_OWNER_KEY, JSON.stringify(owned));
+    }
+
+    function makeId(prefix) {
+      const randomId = window.crypto && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      return `${prefix}-${randomId}`;
+    }
+
+    function rememberPreviewResponse(response) {
+      localStorage.setItem(LOCAL_RESPONSE_KEY, JSON.stringify([...localResponses(), response]));
+    }
+
+    function activeResponses() {
+      const cancelled = new Set(registryState.responses
+        .filter(response => response.response_type === "undo" && response.cancels_response_id)
+        .map(response => response.cancels_response_id));
+
+      return registryState.responses.filter(response => {
+        if (response.response_type === "undo") return false;
+        if (response.response_id && cancelled.has(response.response_id)) return false;
+        return true;
+      });
+    }
+
+    function giftResponses(gift) {
+      return activeResponses().filter(response => response.gift_id === gift.id);
+    }
+
+    function giftById(id) {
+      return registryState.gifts.find(gift => gift.id === id);
+    }
+
+    function isMultiClaim(gift) {
+      return gift.mode === "multi_claim";
+    }
+
+    function contributionTotal(gift) {
+      return giftResponses(gift)
+        .filter(response => response.response_type === "contribute")
+        .reduce((sum, response) => sum + (Number(response.amount_sgd) || 0), 0);
+    }
+
+    function reservedBy(gift) {
+      return giftResponses(gift).find(response => ["reserve", "purchased"].includes(response.response_type));
+    }
+
+    function isClaimed(gift) {
+      if (isMultiClaim(gift)) return false;
+      if (reservedBy(gift)) return true;
+      const target = targetAmount(gift);
+      return target > 0 && contributionTotal(gift) >= target;
+    }
+
+    function progressPercent(gift) {
+      const target = targetAmount(gift);
+      if (target <= 0) return 0;
+      return Math.min(100, Math.round((contributionTotal(gift) / target) * 100));
+    }
+
+    function responseSummary(gift) {
+      const responses = giftResponses(gift);
+      if (isMultiClaim(gift)) {
+        const names = responses
+          .filter(response => ["reserve", "purchased"].includes(response.response_type))
+          .map(response => escapeHtml(response.guest_name));
+        if (!names.length) return "";
+        return `${names.map(name => `<strong>${name}</strong>`).join(", ")} ${names.length === 1 ? "is" : "are"} getting books.`;
+      }
+      const reserver = reservedBy(gift);
+      if (reserver) return `<strong>${escapeHtml(reserver.guest_name)}</strong> is getting this.`;
+      const contributions = responses.filter(response => response.response_type === "contribute");
+      if (!contributions.length) return "";
+      return contributions.map(response => `<strong>${escapeHtml(response.guest_name)}</strong>: ${money(response.amount_sgd)}`).join("<br>");
+    }
+
+    function ownedGiftResponses(gift) {
+      const owned = ownedResponses();
+      return giftResponses(gift).filter(response => response.response_id && owned[response.response_id]);
+    }
+
+    function responseLabel(response) {
+      if (response.response_type === "contribute") {
+        return `${escapeHtml(response.guest_name)}: ${money(response.amount_sgd)}`;
+      }
+      if (response.gift_id === "books") {
+        return `${escapeHtml(response.guest_name)} is getting some books`;
+      }
+      return `${escapeHtml(response.guest_name)} is getting this`;
+    }
+
+    function giftActionForms(gift, disabled) {
+      return `
+        <div class="action-panel">
+          <form data-action="reserve" data-gift-id="${escapeHtml(gift.id)}">
+            <input name="guest_name" placeholder="Your name" autocomplete="name" ${disabled} required>
+            <button class="btn primary" type="submit" ${disabled}>${isMultiClaim(gift) ? "I'm getting some" : "I'm getting this"}</button>
+          </form>
+          ${isMultiClaim(gift) ? "" : `<form class="contribute-form" data-action="contribute" data-gift-id="${escapeHtml(gift.id)}">
+            <input name="guest_name" placeholder="Your name" autocomplete="name" ${disabled} required>
+            <input name="amount_sgd" type="number" inputmode="numeric" min="1" step="1" placeholder="SGD" ${disabled} required>
+            <button class="btn" type="submit" ${disabled}>Contribute</button>
+          </form>`}
+        </div>
+      `;
+    }
+
+    function undoControls(gift) {
+      const mine = ownedGiftResponses(gift);
+      if (!mine.length) return "";
+      return `
+        <div class="undo-panel" aria-label="Your saved responses">
+          ${mine.map(response => `
+            <div class="undo-row">
+              <span>${responseLabel(response)}</span>
+              <button class="btn subtle" type="button" data-undo-response-id="${escapeHtml(response.response_id)}">Undo</button>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderStatus() {
+      const strip = document.getElementById("statusStrip");
+      const updated = document.getElementById("lastUpdated");
+      if (REGISTRY_ENDPOINT && !registryState.readOnly) {
+        strip.innerHTML = `<span><strong>Live registry.</strong> Guest responses are saving to the shared sheet.</span><span id="lastUpdated"></span>`;
+        document.getElementById("lastUpdated").textContent = `Updated ${new Date().toLocaleTimeString("en-SG", { hour: "2-digit", minute: "2-digit" })}`;
+        return;
+      }
+      if (REGISTRY_ENDPOINT && registryState.readOnly) {
+        strip.innerHTML = `<span><strong>Local fallback.</strong> I could not reach the shared sheet, so responses save only in this browser for now.</span><span id="lastUpdated">Preview responses enabled</span>`;
+        return;
+      }
+      strip.innerHTML = `<span><strong>Preview mode.</strong> You can type and test responses here; they save only in this browser until the Google Sheet is connected.</span><span id="lastUpdated">Preview responses enabled</span>`;
+    }
+
+    function renderRegistry() {
+      renderStatus();
+      const grid = document.getElementById("giftGrid");
+      const gifts = [...registryState.gifts]
+        .filter(gift => gift.active !== false)
+        .sort(compareGifts);
+
+      grid.innerHTML = gifts.map((gift, index) => {
+        const claimed = isClaimed(gift);
+        const progress = progressPercent(gift);
+        const tilt = [-1.2, 0.7, -0.4, 1.1, -0.8, 0.5][index % 6];
+        return `
+          <article class="gift-card ${claimed ? "claimed" : ""}" style="--tilt:${tilt}deg" data-gift-id="${escapeHtml(gift.id)}" role="button" tabindex="0" aria-label="Open ${escapeHtml(gift.name)} details">
+            <div class="gift-art-wrap">
+              <img class="gift-art" src="${escapeHtml(gift.image)}" alt="${escapeHtml(gift.name)}">
+            </div>
+            <h3 class="gift-title">${escapeHtml(gift.name)}</h3>
+            <p class="gift-desc">${escapeHtml(gift.description)}</p>
+            <div class="gift-meta">
+              ${priceText(gift.price_sgd) ? `<span class="tag">${priceText(gift.price_sgd)}</span>` : ""}
+            </div>
+            ${progress ? `<div class="progress" aria-label="Contribution progress">
+              <div class="progress-track"><div class="progress-fill" style="--progress:${progress}%"></div></div>
+              <p class="progress-copy">${money(contributionTotal(gift))} contributed${targetText(gift) ? ` of ${targetText(gift)}` : ""}</p>
+            </div>` : ""}
+            <p class="responses">${responseSummary(gift)}</p>
+            <div class="claimed-label">${reservedBy(gift) ? "Covered with thanks" : "Fully contributed with thanks"}</div>
+          </article>
+        `;
+      }).join("");
+
+      grid.querySelectorAll(".gift-card").forEach(card => {
+        card.addEventListener("click", event => {
+          if (event.target.closest("a, button, input, form, label, select, textarea")) return;
+          openGiftModal(card.dataset.giftId);
+        });
+        card.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          if (event.target.closest("a, button, input, form, label, select, textarea")) return;
+          event.preventDefault();
+          openGiftModal(card.dataset.giftId);
+        });
+      });
+    }
+
+    function openGiftModal(giftId) {
+      const gift = giftById(giftId);
+      if (!gift) return;
+      const claimed = isClaimed(gift);
+      const progress = progressPercent(gift);
+      const disabled = "";
+      const undoPanel = undoControls(gift);
+      const modal = document.getElementById("giftModal");
+      const content = document.getElementById("giftModalContent");
+      content.innerHTML = `
+        <img class="modal-art" src="${escapeHtml(gift.image)}" alt="${escapeHtml(gift.name)}">
+        <div>
+          <h3 class="modal-title" id="giftModalTitle">${escapeHtml(gift.name)}</h3>
+          <p class="modal-copy">${escapeHtml(gift.description)}</p>
+          <div class="gift-meta modal-meta">
+            ${priceText(gift.price_sgd) ? `<span class="tag">${priceText(gift.price_sgd)}</span>` : ""}
+          </div>
+          ${giftLinksMarkup(gift)}
+          ${progress ? `<div class="progress" aria-label="Contribution progress">
+            <div class="progress-track"><div class="progress-fill" style="--progress:${progress}%"></div></div>
+            <p class="progress-copy">${money(contributionTotal(gift))} contributed${targetText(gift) ? ` of ${targetText(gift)}` : ""}</p>
+          </div>` : ""}
+          ${responseSummary(gift) ? `<p class="responses">${responseSummary(gift)}</p>` : ""}
+          ${claimed ? `<div class="claimed-label" style="display:block">${reservedBy(gift) ? "Covered with thanks" : "Fully contributed with thanks"}</div>` : `<div class="modal-actions">${giftActionForms(gift, disabled)}</div>`}
+          ${undoPanel}
+        </div>
+      `;
+      content.querySelectorAll("form").forEach(form => form.addEventListener("submit", submitResponse));
+      content.querySelectorAll("[data-undo-response-id]").forEach(button => button.addEventListener("click", undoResponse));
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.getElementById("closeGiftModal").focus();
+    }
+
+    function closeGiftModal() {
+      const modal = document.getElementById("giftModal");
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.getElementById("giftModalContent").innerHTML = "";
+    }
+
+    async function loadRegistry() {
+      if (!REGISTRY_ENDPOINT) {
+        registryState.responses = previewResponses();
+        renderRegistry();
+        return;
+      }
+
+      try {
+        const response = await fetch(`${REGISTRY_ENDPOINT}?t=${Date.now()}`);
+        if (!response.ok) throw new Error("Sheet request failed");
+        const data = await response.json();
+        if (data.ok === false) throw new Error(data.error || "Sheet returned an error");
+        registryState = {
+          gifts: Array.isArray(data.gifts) && data.gifts.length ? data.gifts : DEFAULT_GIFTS,
+          responses: Array.isArray(data.responses) ? data.responses : [],
+          readOnly: false,
+          source: "Live registry"
+        };
+      } catch (error) {
+        registryState = {
+          gifts: DEFAULT_GIFTS,
+          responses: previewResponses(),
+          readOnly: true,
+          source: "Read-only fallback"
+        };
+      }
+      renderRegistry();
+    }
+
+    async function submitResponse(event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const payload = {
+        gift_id: form.dataset.giftId,
+        guest_name: String(formData.get("guest_name") || "").trim(),
+        response_type: form.dataset.action,
+        amount_sgd: form.dataset.action === "contribute" ? Number(formData.get("amount_sgd") || 0) : "",
+        note: "",
+        response_id: makeId("resp"),
+        edit_token: makeId("token"),
+        cancels_response_id: ""
+      };
+
+      if (!payload.guest_name) {
+        showToast("Please leave your name first.");
+        return;
+      }
+      if (payload.response_type === "contribute" && (!Number.isFinite(payload.amount_sgd) || payload.amount_sgd <= 0)) {
+        showToast("Please enter an SGD amount.");
+        return;
+      }
+
+      if (registryState.readOnly || !REGISTRY_ENDPOINT) {
+        rememberPreviewResponse({ ...payload, timestamp: new Date().toISOString() });
+        rememberOwnedResponse(payload);
+        registryState.responses = previewResponses();
+        showToast("Saved in preview on this browser.");
+        form.reset();
+        closeGiftModal();
+        renderRegistry();
+        return;
+      }
+
+      const buttons = form.querySelectorAll("button");
+      buttons.forEach(button => { button.disabled = true; });
+      try {
+        await fetch(REGISTRY_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        rememberOwnedResponse(payload);
+        showToast("Thank you. Refreshing the registry...");
+        form.reset();
+        closeGiftModal();
+        setTimeout(loadRegistry, 900);
+      } catch (error) {
+        showToast("I could not save that. Please message us instead.");
+      } finally {
+        buttons.forEach(button => { button.disabled = false; });
+      }
+    }
+
+    async function undoResponse(event) {
+      const responseId = event.currentTarget.dataset.undoResponseId;
+      const original = activeResponses().find(response => response.response_id === responseId);
+      const owned = ownedResponses()[responseId];
+      if (!original || !owned) {
+        showToast("I could not find a saved response from this browser.");
+        return;
+      }
+
+      const payload = {
+        gift_id: original.gift_id,
+        guest_name: original.guest_name || owned.guest_name || "Guest",
+        response_type: "undo",
+        amount_sgd: "",
+        note: "Undo my response",
+        response_id: makeId("undo"),
+        edit_token: owned.edit_token,
+        cancels_response_id: responseId
+      };
+
+      event.currentTarget.disabled = true;
+
+      if (registryState.readOnly || !REGISTRY_ENDPOINT) {
+        rememberPreviewResponse({ ...payload, timestamp: new Date().toISOString() });
+        registryState.responses = previewResponses();
+        showToast("Undone in preview on this browser.");
+        closeGiftModal();
+        renderRegistry();
+        return;
+      }
+
+      try {
+        await fetch(REGISTRY_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        showToast("Undone. Refreshing the registry...");
+        closeGiftModal();
+        setTimeout(loadRegistry, 900);
+      } catch (error) {
+        showToast("I could not undo that. Please message us instead.");
+        event.currentTarget.disabled = false;
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    document.getElementById("closeGiftModal").addEventListener("click", closeGiftModal);
+    document.getElementById("giftModal").addEventListener("click", event => {
+      if (event.target.id === "giftModal") closeGiftModal();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeGiftModal();
+    });
+
+    loadRegistry();
+  </script>
+</body>
+</html>
