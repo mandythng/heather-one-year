@@ -69,19 +69,25 @@
     .status-strip {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      min-height: 46px;
-      margin: 0 0 28px;
-      padding: 11px 16px;
-      border: 1px solid rgba(91, 59, 32, 0.14);
-      border-radius: 8px;
-      background: rgba(255, 249, 232, 0.74);
-      color: var(--brown-soft);
-      font-size: 0.88rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      margin: 10px auto 0;
+      color: rgba(138, 106, 67, 0.72);
+      font-size: 0.78rem;
+      text-align: center;
     }
 
-    .status-strip strong { color: var(--sage); }
+    .status-strip strong {
+      color: var(--brown-soft);
+      font-weight: 650;
+    }
+
+    .status-strip span + span::before {
+      content: "·";
+      margin-right: 10px;
+      color: rgba(138, 106, 67, 0.46);
+    }
 
     .how-it-works {
       position: relative;
@@ -548,7 +554,8 @@
 
     @media (max-width: 680px) {
       .site-shell { width: min(100% - 18px, 1180px); padding-top: 8px; }
-      .status-strip { align-items: flex-start; flex-direction: column; }
+      .status-strip { gap: 4px 8px; }
+      .status-strip span + span::before { margin-right: 8px; }
       .board-top { align-items: center; }
       .hunny-pot-accent { width: 138px; margin: -28px -4px -18px 0; }
       .gift-grid { grid-template-columns: 1fr; }
@@ -567,11 +574,6 @@
       <img src="assets/registry/header-edited.png" alt="Our little hunny, Heather is one. Your presence is the sweetest gift. If you insist on a gift, here are some things we're considering for Heather. No pressure at all, please come celebrate with us.">
     </section>
 
-    <div class="status-strip" id="statusStrip">
-      <span><strong>Preview mode.</strong> Add your Google Apps Script URL in the page settings to enable live guest responses.</span>
-      <span id="lastUpdated">Sample registry shown</span>
-    </div>
-
     <section class="how-it-works" aria-labelledby="howTitle">
       <h2 class="section-heading" id="howTitle">How it works</h2>
       <ol class="steps">
@@ -589,6 +591,10 @@
     </section>
 
     <p class="footer-note">No pressure, genuinely. This page is only here for guests who asked what Heather might enjoy next.</p>
+    <div class="status-strip" id="statusStrip">
+      <span><strong>Preview mode</strong></span>
+      <span id="lastUpdated">Sample registry shown</span>
+    </div>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1034,15 +1040,15 @@
       const strip = document.getElementById("statusStrip");
       const updated = document.getElementById("lastUpdated");
       if (REGISTRY_ENDPOINT && !registryState.readOnly) {
-        strip.innerHTML = `<span><strong>Live registry.</strong> Guest responses are saving to the shared sheet.</span><span id="lastUpdated"></span>`;
-        document.getElementById("lastUpdated").textContent = `Updated ${new Date().toLocaleTimeString("en-SG", { hour: "2-digit", minute: "2-digit" })}`;
+        strip.innerHTML = `<span><strong>Live registry</strong></span><span id="lastUpdated"></span>`;
+        document.getElementById("lastUpdated").textContent = `Synced ${new Date().toLocaleTimeString("en-SG", { hour: "2-digit", minute: "2-digit" })}`;
         return;
       }
       if (REGISTRY_ENDPOINT && registryState.readOnly) {
-        strip.innerHTML = `<span><strong>Local fallback.</strong> I could not reach the shared sheet, so responses save only in this browser for now.</span><span id="lastUpdated">Preview responses enabled</span>`;
+        strip.innerHTML = `<span><strong>Offline preview</strong></span><span id="lastUpdated">Responses may not save</span>`;
         return;
       }
-      strip.innerHTML = `<span><strong>Preview mode.</strong> You can type and test responses here; they save only in this browser until the Google Sheet is connected.</span><span id="lastUpdated">Preview responses enabled</span>`;
+      strip.innerHTML = `<span><strong>Preview mode</strong></span><span id="lastUpdated">Responses save only in this browser</span>`;
     }
 
     function renderRegistry() {
