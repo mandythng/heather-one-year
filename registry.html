@@ -736,6 +736,18 @@
         active: true
       },
       {
+        id: "ball-pit-balls-additional-100",
+        name: "Plastic Balls for Ball Pit (additional 100)",
+        description: "Neutral plastic balls to top up Heather's ball pit for soft play.",
+        price_sgd: 28,
+        target_sgd: 28,
+        link: "https://shopee.sg/product/5696946/6326165441?gads_t_sig=gqRjZGVrxHCFomtpsTE0MjUxOnRzc19zZGtfa2V5omt20QABpGFsZ2_SAAAAZKNkZWvAomN0xEAAAAAMRoz0ZUjQw0QlRa--FjB0AKnHQPF7xv4DyGj9-GQwqn4zSdB6gztmw7ebmtsZs9FPJxlVqctc57WUE3IRqmNpcGhlcnRleHTEaAAAAAwt-kkOTp0X81699RARyJV50qNRa_YyiNqdAUTi-EmD7VTtMZmrnq7nQHyuQJZvArKmlw9Hwa8OCAJpRaaOzLsxLUHAUHVQ367uPOShiC2yjfmb_F_h4scQgnnVsyCepAozj_YW&gad_source=1&gad_campaignid=23295224318&gbraid=0AAAAADPpRQRFmUkuVj0hqjFVZikqCSI_R&gclid=CjwKCAjwt7XQBhBkEiwAtStpp1YbKnz-_bst8HkgyYori2du9cKnOZoTU5HoVl90TIJV3z39Bi3SuBoCwKwQAvD_BwE",
+        image: "assets/registry/gift-ball-pit-balls.png",
+        mode: "claim_or_contribute",
+        sort_order: 11.5,
+        active: true
+      },
+      {
         id: "building-bath-toy-set",
         name: "Building Bath Toy Set",
         description: "A bath-time pipe set for pouring, connecting, and watching water flow.",
@@ -787,6 +799,10 @@
       }
     };
 
+    const EXTRA_DEFAULT_GIFT_IDS = new Set([
+      "ball-pit-balls-additional-100"
+    ]);
+
     let registryState = {
       gifts: DEFAULT_GIFTS,
       responses: previewResponses(),
@@ -795,7 +811,14 @@
     };
 
     function applyGiftOverrides(gifts) {
-      return gifts.map(gift => ({ ...gift, ...(GIFT_OVERRIDES[gift.id] || {}) }));
+      const mergedGifts = gifts.map(gift => ({ ...gift, ...(GIFT_OVERRIDES[gift.id] || {}) }));
+      const giftIds = new Set(mergedGifts.map(gift => gift.id));
+      DEFAULT_GIFTS.forEach(gift => {
+        if (EXTRA_DEFAULT_GIFT_IDS.has(gift.id) && !giftIds.has(gift.id)) {
+          mergedGifts.push(gift);
+        }
+      });
+      return mergedGifts;
     }
 
     function escapeHtml(value) {
